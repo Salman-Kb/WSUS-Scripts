@@ -1,0 +1,12 @@
+# Connect to the server
+$server = Get-WsusServer -name 'ServerName' -PortNumber 8530
+# Show all the groups in the server with their ID
+$server.GetComputerTargetGroup() | ft Name, id
+# Get a computer
+$computer = $server.GetComputerTargetByName('ComputerName')
+# Add computer to a group
+$newGroup = $server.GetComputerTargetGroup('GroupID')
+$newGroup.AddComputerTarget($computer)
+# Reove computer from a group
+$oldGroup = $server.GetComputerTargetGroup('GroupID')
+$oldGroup.RemoveComputerTarget($computer)
